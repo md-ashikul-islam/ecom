@@ -1,10 +1,26 @@
 <?php
     $obj_admin = new admin();
     $ctg_data= $obj_admin -> displayCategory();
+
+    if (isset($_GET['status'])){
+        $get_id=$_GET['id'];
+        if($_GET['status']== 'publish'){
+            $obj_admin -> publish_category($get_id);
+        } elseif($_GET['status']== 'unpublish'){
+            $obj_admin -> unpublish_category($get_id);
+        }
+        elseif($_GET['status']== 'delete'){
+            $obj_admin -> delete_category($get_id);
+            $msg= $obj_admin->delete_category($get_id);
+        }
+    }
 ?>
 
 <h2>Manage Category</h2>
-
+<?php if(isset($msg)){
+    echo $msg;
+}
+   ?>
 <table class="table">
     <thead>
         <tr>
@@ -27,19 +43,19 @@
                  if($ctg['ctg_status']==0){
                      echo "Unpublished";
                      ?>
-                     <a class="btn btn-sm btn-success" href="">Publish it</a>
+                     <a class="btn btn-sm btn-success" href="?status=publish&&id=<?php echo $ctg['ctg_id'];?>">Publish it</a>
                      <?php
                  }else{
                      echo "Published";
                      ?>
-                     <a class="btn btn-sm btn-danger" href="">Unpublish it</a>
+                     <a class="btn btn-sm btn-danger" href="?status=unpublish&&id=<?php echo $ctg['ctg_id'];?>">Unpublish it</a>
                 <?php
                  }
                  ?>                             
                 </td>
                  <td>
                      <a href="">Update</a>
-                     <a href="">Delete</a>
+                     <a href="?status=delete&&id=<?php echo $ctg['ctg_id'] ?>">Delete</a>
                  </td>
              </tr>
              

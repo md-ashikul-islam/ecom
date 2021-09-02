@@ -59,8 +59,10 @@ include("includes/header.php");
                                                         include("views/manage-product-view.php");
                                                     } elseif ($views == "manage-user") {
                                                         include("views/manage-user-view.php");
+                                                    } elseif ($views == "edit_cat") {
+                                                        include("views/edit_cat_view.php");
                                                     }
-                                                }
+                                                } 
                                                 ?>                                          
                                         </div>
                                     </div>

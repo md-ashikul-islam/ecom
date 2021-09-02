@@ -28,7 +28,7 @@
                     <li class=" ">
                         <a href="manage-category.php">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Remove Category</span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Manage Category</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
