@@ -54,7 +54,7 @@
                  ?>                             
                 </td>
                  <td>
-                     <a href="">Update</a>
+                     <a href="edit_cat.php?status=edit&&id=<?php echo $ctg['ctg_id'];?>">Edit</a>
                      <a href="?status=delete&&id=<?php echo $ctg['ctg_id'] ?>">Delete</a>
                  </td>
              </tr>

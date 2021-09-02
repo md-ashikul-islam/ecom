@@ -1,4 +1,4 @@
 <?php
 
-$views = "edit-cat";
+$views = "edit_cat";
 include("template.php");

@@ -96,4 +96,26 @@ class admin
             return $msg;
         }
     }
+
+    function getcatinfo_toupdate($id){
+        $query = "SELECT * FROM category WHERE ctg_id=$id";
+        if(mysqli_query($this->conn,$query)){
+            $category_info = mysqli_query($this->conn,$query);
+            $ctg_info = mysqli_fetch_assoc($category_info);
+            return $ctg_info;
+        }
+    }
+
+    function update_category($recievedData){
+        $ctg_name = $recievedData['update_ctg_name'];
+        $ctg_desc = $recievedData['update_ctg_desc'];
+        $ctg_id = $recievedData['update_ctg_id'];
+
+        $query= "UPDATE category SET ctg_name='$ctg_name', ctg_desc='$ctg_desc' WHERE ctg_id=$ctg_id";
+        if(mysqli_query($this->conn,$query)){
+            $return_msg = "Category Updated Successfully!";
+            return $return_msg;
+        }
+
+    }
 }
