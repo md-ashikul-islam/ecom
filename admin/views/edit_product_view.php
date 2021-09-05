@@ -1,14 +1,28 @@
 <?php 
     $obj_admin = new admin();
+    $ctg_info = $obj_admin -> displayCategory();
     if(isset($_GET['pstatus'])){
         $id = $_GET['id'];
         if($_GET['pstatus']=='edit'){
            $pd_info = $obj_admin -> getEditProduct_info($id);
         }
     }
+    if(isset($_POST['u_pd_btn'])){
+        $updatemsg=$obj_admin -> updateProduct($_POST);
+    }
 
 ?>
+
+<h2>Update Product</h2>
+<?php 
+    if(isset($updatemsg)){
+        echo $updatemsg;
+    }
+?>
 <form action="" class="form" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <input hidden type="text" name="u_pd_id" class="form-control" value="<?php echo $pd_info['product_id'];?>">
+    </div>
     <div class="form-group">
         <label for="u_pd_name">Product Name</label>
         <input type="text" name="u_pd_name" class="form-control" value="<?php echo $pd_info['pd_name']; ?>">
@@ -47,5 +61,5 @@
             <option value="0">Unpublished</option>
         </select>
     </div>
-    <input name="pd_btn" type="submit" value="Add Product" class="btn btn-primary btn-block">
+    <input name="u_pd_btn" type="submit" value="Update Product" class="btn btn-primary btn-block">
 </form>

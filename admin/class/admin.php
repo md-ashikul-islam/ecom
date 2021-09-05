@@ -182,4 +182,35 @@ class admin
            return $pd_data;
         }
     }
+
+    function updateProduct($data){
+        $pd_id= $data['u_pd_id'];
+        $pd_name = $data['u_pd_name'];
+        $pd_price = $data['u_pd_price'];
+        $pd_desc = $data['u_pd_desc'];
+        $pd_ctg = $data['u_pd_ctg'];
+        $pd_img_name = $_FILES['u_pd_image']['name'];
+        $pd_img_size = $_FILES['u_pd_image']['size'];
+        $pd_img_tmp_name = $_FILES['u_pd_image']['tmp_name'];
+        $pd_extention = pathinfo($pd_img_name, PATHINFO_EXTENSION);
+        $pd_status = $data['u_pd_status'];
+        if ($pd_extention == 'jpg' or $pd_extention == 'png' or $pd_extention = 'jpeg') {
+            if ($pd_img_size <= 10485760) {
+                $query = "UPDATE product SET pd_name='$pd_name',pd_price=$pd_price, pd_desc='$pd_desc',
+                pd_ctg=$pd_ctg,pd_img='$pd_img_name',pd_status='$pd_status' WHERE product_id=$pd_id";
+
+                if (mysqli_query($this->conn, $query)) {
+                    move_uploaded_file($pd_img_tmp_name, 'upload/' . $pd_img_name);
+                    $msg = "Product Updated succcessfully!";
+                    return $msg;
+                }
+            } else {
+                $msg = "Image Size is too large! It must be below 10 MB.";
+                return $msg;
+            }
+        } else {
+            $msg = "Wrong File Type! Please upload JPG/JPEG/PNG Files Only";
+            return $msg;
+        }
+    }
 }
