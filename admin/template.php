@@ -62,6 +62,9 @@ include("includes/header.php");
                                                     } elseif ($views == "edit_cat") {
                                                         include("views/edit_cat_view.php");
                                                     }
+                                                    elseif ($views == "edit_product") {
+                                                        include("views/edit_product_view.php");
+                                                    }
                                                 } 
                                                 ?>                                          
                                         </div>
