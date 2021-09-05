@@ -118,4 +118,43 @@ class admin
         }
 
     }
+
+    function add_product($data){
+        $pd_name = $data['pd_name'];
+        $pd_price = $data['pd_price'];
+        $pd_desc = $data['pd_desc'];
+        $pd_ctg = $data['pd_ctg'];
+        $pd_img_name = $_FILES['pd_image']['name'];
+        $pd_img_size = $_FILES['pd_image']['size'];
+        $pd_img_tmp_name = $_FILES['pd_image']['tmp_name'];
+        $pd_extention = pathinfo($pd_img_name, PATHINFO_EXTENSION);
+        $pd_status = $data['pd_status'];
+
+        if($pd_extention == 'jpg' or $pd_extention=='png' or $pd_extention='jpeg'){
+            if($pd_img_size <= 10485760){
+                $query= "INSERT INTO product(pd_name,pd_price,pd_img,pd_desc,pd_status,pd_ctg) 
+                VALUE('$pd_name',$pd_price,'$pd_img_name','$pd_desc',$pd_status,$pd_ctg)";
+
+                if(mysqli_query($this->conn,$query)){
+                    move_uploaded_file($pd_img_tmp_name,'upload/'.$pd_img_name);
+                    $msg= "Product added succcessfully!";
+                    return $msg;
+                }
+            }else{
+                $msg= "Image Size is too large! It must be below 10 MB.";
+                return $msg;
+            }
+        } else{
+            $msg="Wrong File Type! Please upload JPG/JPEG/PNG Files Only";
+            return $msg;
+        }
+    }
+
+    function display_product(){
+        $query= "SELECT * FROM product_ctg_info";
+        if(mysqli_query($this-> conn, $query)){
+            $product = mysqli_query($this-> conn, $query);
+            return $product;
+        }
+    }
 }
