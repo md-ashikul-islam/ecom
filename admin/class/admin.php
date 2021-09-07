@@ -79,6 +79,16 @@ class admin
         }
     }
 
+    function p_displayCategory()
+    {
+        $query = "SELECT * FROM category WHERE ctg_status=1";
+
+        if (mysqli_query($this->conn, $query)) {
+            $return_ctg = mysqli_query($this->conn, $query);
+            return $return_ctg;
+        }
+    }
+
     function publish_category($id)
     {
         $query = "UPDATE category SET ctg_status = 1 WHERE ctg_id=$id";
@@ -163,6 +173,7 @@ class admin
             return $product;
         }
     }
+    
 
     function deleteProduct($id)
     {

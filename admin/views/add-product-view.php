@@ -1,6 +1,6 @@
 <?php
     $obj_admin=new admin();
-    $ctg_info = $obj_admin -> displayCategory();
+    $ctg_info = $obj_admin -> p_displayCategory();
     if(isset($_POST['pd_btn'])){
         $returned_msg=$obj_admin -> add_product($_POST);
     }
