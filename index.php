@@ -1,7 +1,11 @@
 <?php 
-    include("admin/class/admin.php");
-    $obj_admin = new admin();
-    $ctg=$obj_admin -> p_displayCategory();
+    include('admin/class/admin.php');
+    $obj = new admin();
+    $ctg = $obj -> p_displayCategory();
+    $ctgDatas= array();
+    while($data=mysqli_fetch_assoc($ctg)){
+        $ctgDatas[]=$data;
+    }
 ?>
 
 <?php include_once("includes/head.php"); ?>
@@ -24,7 +28,9 @@
         <div id="main-content" class="main-content">
 
             <!--Block 01: Vertical Menu And Main Slide-->
-            <?php include_once("includes/verticalmenu.php"); ?>
+            <?php include_once('includes/verticalmenu.php'); ?>
+
+            <?php include_once('includes/slider.php'); ?>
 
             <!--Block 02: Banners-->
             <?php include_once("includes/block1.php"); ?>

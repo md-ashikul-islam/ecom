@@ -224,4 +224,29 @@ class admin
             return $msg;
         }
     }
+
+    function product_by_ctg($id){
+        $query="SELECT * FROM product_ctg_info WHERE ctg_id=$id";
+        if (mysqli_query($this->conn, $query)) {
+            $catwiseproductInfo = mysqli_query($this->conn, $query);
+            return $catwiseproductInfo;
+        }
+    }
+
+    function product_by_id($id){
+        $query="SELECT * FROM product_ctg_info WHERE product_id=$id";
+        if (mysqli_query($this->conn, $query)) {
+            $pdbyID = mysqli_query($this->conn, $query);
+            return $pdbyID;
+        }
+    }
+
+    function ctg_by_id($id){
+        $query ="SELECT * FROM product_ctg_info WHERE ctg_id=$id";
+        if (mysqli_query($this->conn, $query)) {
+            $ctgbyID = mysqli_query($this->conn, $query);
+            $ctg = mysqli_fetch_assoc($ctgbyID);
+            return $ctg;
+        }
+    }
 }

@@ -4,53 +4,13 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-9">
                         <section class="footer-item">
-                            <a href="home-04-light.html" class="logo footer-logo"><img src="assets/images/organic-4.png" alt="biolife logo" width="135" height="36"></a>
+                            <a href="home-04-light.html" class="logo footer-logo"><img src="assets/images/cholokini.png" alt="biolife logo"></a>
                             <div class="footer-phone-info">
                                 <i class="biolife-icon icon-head-phone"></i>
                                 <p class="r-info">
                                     <span>Got Questions ?</span>
                                     <span>(+880)  1845740000</span>
                                 </p>
-                            </div>
-                            <div class="newsletter-block layout-01">
-                                <h4 class="title">Newsletter Signup</h4>
-                                <div class="form-content">
-                                    <form action="#" name="new-letter-foter">
-                                        <input type="email" class="input-text email" value="" placeholder="Your email here...">
-                                        <button type="submit" class="bnt-submit" name="ok">Sign up</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 md-margin-top-5px sm-margin-top-50px xs-margin-top-40px">
-                        <section class="footer-item">
-                            <h3 class="section-title">Useful Links</h3>
-                            <div class="row">
-                                <div class="col-lg-6 col-sm-6 col-xs-6">
-                                    <div class="wrap-custom-menu vertical-menu-2">
-                                        <ul class="menu">
-                                            <li><a href="#">About Us</a></li>
-                                            <li><a href="#">About Our Shop</a></li>
-                                            <li><a href="#">Secure Shopping</a></li>
-                                            <li><a href="#">Delivery infomation</a></li>
-                                            <li><a href="#">Privacy Policy</a></li>
-                                            <li><a href="#">Our Sitemap</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-sm-6 col-xs-6">
-                                    <div class="wrap-custom-menu vertical-menu-2">
-                                        <ul class="menu">
-                                            <li><a href="#">Who We Are</a></li>
-                                            <li><a href="#">Our Services</a></li>
-                                            <li><a href="#">Projects</a></li>
-                                            <li><a href="#">Contacts Us</a></li>
-                                            <li><a href="#">Innovation</a></li>
-                                            <li><a href="#">Testimonials</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                         </section>
                     </div>
