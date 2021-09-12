@@ -13,14 +13,11 @@ if (isset($_GET['status'])) {
         $pdByCtg = $obj->product_by_id($pdID);
         $products = array();
         $pdInfo = mysqli_fetch_assoc($pdByCtg);
-        if($pdInfo==null){
-            echo $pdID;
-        }
         $products[] = $pdInfo;
     }
 }
 $cat_id= $pdInfo['ctg_id'];
-$related_pd= $obj -> product_by_ctg($cat_id);
+$related_pd= $obj -> related_product($cat_id);
 ?>
 
 <?php include_once("includes/head.php"); ?>
@@ -77,7 +74,7 @@ $related_pd= $obj -> product_by_ctg($cat_id);
                             <?php foreach($products as $pd) {
 
                             ?>
-                            <form action="">
+                            <form action="addtocart.php" method="POST">
                                 <div>
                                     <!-- summary info -->
                                     <div class="sumary-product single-layout">

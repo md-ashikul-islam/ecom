@@ -241,6 +241,15 @@ class admin
         }
     }
 
+    function related_product($id){
+        $query= "SELECT * FROM product_ctg_info WHERE ctg_id=$id ORDER BY product_id DESC LIMIT 7";
+        if(mysqli_query($this->conn, $query)){
+            $proinfo = mysqli_query($this->conn, $query);
+            return $proinfo;
+            
+    }
+}
+
     function ctg_by_id($id){
         $query ="SELECT * FROM product_ctg_info WHERE ctg_id=$id";
         if (mysqli_query($this->conn, $query)) {

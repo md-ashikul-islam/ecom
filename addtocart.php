@@ -10,22 +10,34 @@ while ($data = mysqli_fetch_assoc($ctg)) {
 
 if(isset($_POST['addtocart'])){
     if(isset($_SESSION['cart'])){
-        $count = count($_SESSION['cart']);
+        $pdName=array_column($_SESSION['cart'],'pd_name');
+        if(in_array($_POST['pd_name'],$pdName)){
+            echo "<script> alert('This product is already in your cart') </script>";
+        }else{
+            $count = count($_SESSION['cart']);
         $_SESSION['cart'][$count]=array(
             'pd_name' =>$_POST['pd_name'],
             'pd_price' =>$_POST['pd_price'],
             'pd_img' =>$_POST['pd_img'],
             'quantity'=>1,);
-
-    } else{
+    }
+        }
+         else{
         $_SESSION['cart'][0]=array(
         'pd_name' =>$_POST['pd_name'],
         'pd_price' =>$_POST['pd_price'],
         'pd_img' =>$_POST['pd_img'],
         'quantity'=>1,
-
         );
-        print_r($_SESSION['cart']);
+    }
+}
+
+if(isset($_POST['removeItemName'])){
+    foreach($_SESSION['cart'] as $key=>$value){
+        if($value['pd_name']=$_POST['removeItemName']){
+            unset($_SESSION['cart'][$key]);
+            $_SESSION['cart']=array_values($_SESSION['cart']);
+        }
     }
 }
 
@@ -65,36 +77,36 @@ if(isset($_POST['addtocart'])){
                                         <tr>
                                             <th class="product-name">Product Name</th>
                                             <th class="product-price">Price</th>
-                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-quantity">Remove</th>
                                             <th class="product-subtotal">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php 
+                                       if(isset($_SESSION['cart'])){
+                                           $subtotal=0;
+                                           $totalProduct=0;
+                                        foreach($_SESSION['cart'] as $key=>$value){
+                                            $subtotal = $subtotal+ $value['pd_price'];
+                                            $totalProduct++;
+                                        ?>
                                         <tr class="cart_item">
                                             <td class="product-thumbnail" data-title="Product Name">
                                                 <a class="prd-thumb" href="#">
-                                                    <figure><img width="113" height="113" src="assets/images/shippingcart/pr-01.jpg" alt="shipping cart"></figure>
+                                                    <figure><img width="113" height="113" src="admin/upload/<?php echo $value['pd_img']?>" alt="shipping cart"></figure>
                                                 </a>
-                                                <a class="prd-name" href="#">National Fresh Fruit</a>
-                                                <div class="action">
-                                                    <a href="#" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                                    <a href="#" class="remove"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                </div>
+                                                <a class="prd-name" href="#"><?php echo $value['pd_name']?></a>                                   
                                             </td>
                                             <td class="product-price" data-title="Price">
                                                 <div class="price price-contain">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                                    <ins><span class="price-amount"><span class="currencySymbol">৳</span><?php echo $value['pd_price']?></span></ins>
                                                 </div>
                                             </td>
                                             <td class="product-quantity" data-title="Quantity">
-                                                <div class="quantity-box type1">
-                                                    <div class="qty-input">
-                                                        <input type="text" name="qty12554" value="1" data-max_value="20" data-min_value="1" data-step="1">
-                                                        <a href="#" class="qty-btn btn-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
-                                                        <a href="#" class="qty-btn btn-down"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
+                                                <form action="" method="POST">
+                                                    <input type="hidden" value="<?php echo $value['pd_name']?>" name="removeItemName">
+                                                    <input class="btn btn-warning" type="submit" value="Remove Item" name="removeItem">
+                                                </form>
                                             </td>
                                             <td class="product-subtotal" data-title="Total">
                                                 <div class="price price-contain">
@@ -103,6 +115,9 @@ if(isset($_POST['addtocart'])){
                                                 </div>
                                             </td>
                                         </tr>
+                                        <?php }}else{
+                                            echo "Your cart is now empty!";
+                                        } ?>
                                     </tbody>
                                 </table>
                             </form>
@@ -110,8 +125,8 @@ if(isset($_POST['addtocart'])){
                         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                             <div class="shpcart-subtotal-block">
                                 <div class="subtotal-line">
-                                    <b class="stt-name">Subtotal <span class="sub">(2ittems)</span></b>
-                                    <span class="stt-price">£170.00</span>
+                                    <b class="stt-name">Subtotal <span class="sub">(<?php echo $totalProduct.' items'; ?>)</span></b>
+                                    <span class="stt-price"><?php echo $subtotal; ?></span>
                                 </div>
                                 <div class="subtotal-line">
                                     <b class="stt-name">Shipping</b>
@@ -148,68 +163,6 @@ if(isset($_POST['addtocart'])){
                 </div>
                 <br>
             </div>
-            <div class="container">
-                <div class="page-contain category-page no-sidebar">
-                    <div class="container">
-                        <div class="row">
-
-                            <!-- Main content -->
-                            <div id="main-content" class="main-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="product-category grid-style">
-                                    <div class="row">
-                                        <ul class="products-list">
-                                            <?php foreach ($pros as $pro) {  ?>
-                                                <li class="product-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                                    <div class="contain-product layout-default">
-                                                        <div class="product-thumb">
-                                                            <a href="soloProduct.php?status=soloproduct&&id=<?php echo $pro['product_id'] ?>" class="link-to-product">
-                                                                <img src="admin/upload/<?php echo $pro['pd_img'] ?>" alt="dd" width="270" height="270" class="product-thumnail">
-                                                            </a>
-                                                        </div>
-                                                        <div class="info">
-                                                            <b class="categories"><?php echo $pro['pd_name'] ?></b>
-                                                            <h4 class="product-title"><a href="soloProduct.php?status=soloproduct&&id=<?php echo $pro['product_id'] ?>" class="pr-name"><?php echo $pro['pd_name'] ?></a></h4>
-                                                            <div class="price">
-                                                                <ins><span class="price-amount"><span class="currencySymbol">৳</span><?php echo $pro['pd_price'] ?></span></ins>
-                                                            </div>
-                                                            <div class="shipping-info">
-                                                                <p class="shipping-day">1-Day Shipping</p>
-                                                                <p class="for-today">Free Pickup Today</p>
-                                                            </div>
-                                                            <div class="slide-down-box">
-                                                                <p class="message">All products are carefully selected to ensure food safety.</p>
-                                                                <div class="buttons">
-                                                                    <a href="#" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                                                    <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
-                                                                    <a href="soloProduct.php?status=soloproduct&&id=<?php echo $pro['product_id'] ?>" class="btn compare-btn"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            <?php } ?>
-                                        </ul>
-                                    </div>
-                                    <div class="biolife-panigations-block">
-                                        <ul class="panigation-contain">
-                                            <li><span class="current-page">1</span></li>
-                                            <li><a href="#" class="link-page">2</a></li>
-                                            <li><a href="#" class="link-page">3</a></li>
-                                            <li><span class="sep">....</span></li>
-                                            <li><a href="#" class="link-page">20</a></li>
-                                            <li><a href="#" class="link-page next"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 
