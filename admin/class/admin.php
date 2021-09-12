@@ -173,7 +173,7 @@ class admin
             return $product;
         }
     }
-    
+
 
     function deleteProduct($id)
     {
@@ -188,14 +188,15 @@ class admin
     {
         $query = "SELECT * FROM product_ctg_info WHERE product_id=$id";
         if (mysqli_query($this->conn, $query)) {
-           $productInfo =mysqli_query($this->conn, $query);
-           $pd_data= mysqli_fetch_assoc($productInfo);
-           return $pd_data;
+            $productInfo = mysqli_query($this->conn, $query);
+            $pd_data = mysqli_fetch_assoc($productInfo);
+            return $pd_data;
         }
     }
 
-    function updateProduct($data){
-        $pd_id= $data['u_pd_id'];
+    function updateProduct($data)
+    {
+        $pd_id = $data['u_pd_id'];
         $pd_name = $data['u_pd_name'];
         $pd_price = $data['u_pd_price'];
         $pd_desc = $data['u_pd_desc'];
@@ -225,37 +226,94 @@ class admin
         }
     }
 
-    function product_by_ctg($id){
-        $query="SELECT * FROM product_ctg_info WHERE ctg_id=$id";
+    function product_by_ctg($id)
+    {
+        $query = "SELECT * FROM product_ctg_info WHERE ctg_id=$id";
         if (mysqli_query($this->conn, $query)) {
             $catwiseproductInfo = mysqli_query($this->conn, $query);
             return $catwiseproductInfo;
         }
     }
 
-    function product_by_id($id){
-        $query="SELECT * FROM product_ctg_info WHERE product_id=$id";
+    function product_by_id($id)
+    {
+        $query = "SELECT * FROM product_ctg_info WHERE product_id=$id";
         if (mysqli_query($this->conn, $query)) {
             $pdbyID = mysqli_query($this->conn, $query);
             return $pdbyID;
         }
     }
 
-    function related_product($id){
-        $query= "SELECT * FROM product_ctg_info WHERE ctg_id=$id ORDER BY product_id DESC LIMIT 7";
-        if(mysqli_query($this->conn, $query)){
+    function related_product($id)
+    {
+        $query = "SELECT * FROM product_ctg_info WHERE ctg_id=$id ORDER BY product_id DESC LIMIT 7";
+        if (mysqli_query($this->conn, $query)) {
             $proinfo = mysqli_query($this->conn, $query);
             return $proinfo;
-            
+        }
     }
-}
 
-    function ctg_by_id($id){
-        $query ="SELECT * FROM product_ctg_info WHERE ctg_id=$id";
+    function ctg_by_id($id)
+    {
+        $query = "SELECT * FROM product_ctg_info WHERE ctg_id=$id";
         if (mysqli_query($this->conn, $query)) {
             $ctgbyID = mysqli_query($this->conn, $query);
             $ctg = mysqli_fetch_assoc($ctgbyID);
             return $ctg;
+        }
+    }
+
+    function user_registration($data)
+    {
+        $username = $data['Username'];
+        $name = $data['name'];
+        $usermail = $data['email'];
+        $password = $data['pass'];
+        $phoneno = $data['number'];
+
+        $verification_data = "SELECT * FROM customer WHERE userName='$username' or email ='$usermail' ";
+        $sent_data = mysqli_query($this->conn, $verification_data);
+        $row = mysqli_num_rows($sent_data);
+        if ($row == 1) {
+            $msg = "This user already exists! Try using different username or email";
+            return $msg;
+        } else {
+            if (strlen($phoneno) < 11 or strlen($phoneno) > 11) {
+                $msg = "Your Phone no. must consist 11 digits!";
+                return $msg;
+            } else {
+                $query = "INSERT INTO customer(userName,name,email,userPass,phone) VALUE('$username','$name','$usermail','$password','$phoneno')";
+                if (mysqli_query($this->conn, $query)) {
+                    $msg = "Registration Successfully Completed!";
+                    return $msg;
+                }
+            }
+        }
+    }
+
+    function user_login($data)
+    {
+        $user_uname = $data['username'];
+        $user_pass = $data['user_pass'];
+
+        $query = "SELECT * FROM customer WHERE 
+        userName ='$user_uname' AND userPass= '$user_pass'";
+
+        if (mysqli_query($this->conn, $query)) {
+            $result = mysqli_query($this->conn, $query);
+            $user_info = mysqli_fetch_assoc($result);
+
+            if ($user_info) {
+                header('Location:index.php');
+                session_start();
+                $_SESSION['id'] = $user_info['customer_id'];
+                $_SESSION['uname'] = $user_info['username'];
+                $_SESSION['userEmail'] = $user_info['email'];
+                $_SESSION['userPass'] = $user_info['userPass'];
+            } else {
+                $errmsg = "Your Username or Password is incorrect!";
+                return $errmsg;
+            }
         }
     }
 }
