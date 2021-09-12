@@ -304,10 +304,10 @@ class admin
             $user_info = mysqli_fetch_assoc($result);
 
             if ($user_info) {
-                header('Location:index.php');
+                header('Location:home_loggedin.php');
                 session_start();
                 $_SESSION['id'] = $user_info['customer_id'];
-                $_SESSION['uname'] = $user_info['username'];
+                $_SESSION['username'] = $user_info['userName'];
                 $_SESSION['userEmail'] = $user_info['email'];
                 $_SESSION['userPass'] = $user_info['userPass'];
             } else {
@@ -315,5 +315,13 @@ class admin
                 return $errmsg;
             }
         }
+    }
+
+    function user_logout(){
+        unset($_SESSION['id'] );
+        unset($_SESSION['username']);
+        unset($_SESSION['userpass']);
+        unset($_SESSION['userEmail']);
+        header('location:user_login.php');
     }
 }

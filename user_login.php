@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('admin/class/admin.php');
 $obj = new admin();
 $ctg = $obj->p_displayCategory();
@@ -9,6 +10,12 @@ while ($data = mysqli_fetch_assoc($ctg)) {
 
 if(isset($_POST['user_login_btn'])){
     $errmsg= $obj -> user_login($_POST);
+}
+if(isset($_SESSION['id'])){
+    $userid = $_SESSION['id'];
+    if($userid){
+        header('location: user_profile.php');
+    }
 }
 
 ?>
