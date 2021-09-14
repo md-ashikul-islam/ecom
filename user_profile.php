@@ -13,6 +13,10 @@ if(isset($_POST['user_login_btn'])){
 }
 $userid = $_SESSION['id'];
 $userName = $_SESSION['username'];
+$name = $_SESSION['name'];
+$phone = $_SESSION['phone'];
+$email= $_SESSION['userEmail'];
+
 if($userName == null){
     header("location: user_login.php");
 }
@@ -79,26 +83,21 @@ if(isset($_GET['logoutuser'])){
                                 <table class="shop_table cart-form">
                                     <thead>
                                     <tr>
-                                        <th class="product-name">Product Name</th>
-                                        <th class="product-price">Total Paid</th>
-                                        <th class="product-subtotal">Order Status</th>
+                                        <th class="product-name">User Name</th>
+                                        <th class="product-price">Email Address</th>
+                                        <th class="product-subtotal">Phone no.</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr class="cart_item">
-                                        <td class="product-thumbnail" data-title="Product Name">
-                                            <a class="prd-thumb" href="#">
-                                                <figure><img width="113" height="113" src="assets/images/shippingcart/pr-01.jpg" alt="shipping cart"></figure>
-                                            </a>
-                                            <a class="prd-name" href="#">National Fresh Fruit</a>
+                                        <td class="user name" data-title="user Name">
+                                         <?php echo $name ?>
                                         </td>
-                                        <td class="product-price" data-title="Price">
-                                            <div class="price price-contain">
-                                                <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                            </div>
+                                        <td class="user email" data-title="email">
+                                        <?php echo $email; ?>
                                         </td>
                                         <td class="product-subtotal" data-title="Total">
-                                            Pending
+                                        <?php echo $phone; ?>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -109,14 +108,6 @@ if(isset($_GET['logoutuser'])){
                 </div>
                 </div>
             </div>
-            <div class="container">
-        <div class="header-text-content text-center">
-            <div class="header-text wow bounceIn" data-wow-delay="0.6s">Welcome to <span>Biolife HTML</span></div>
-            <div class="header-text-2 wow fadeInUp" data-wow-delay="0.6s">The best templates for ecommerce websites!</div>
-            <a target="_blank" href="https://1.envato.market/qvr1O" class="btn-header purchase">Purchase</a>
-            <a href="#section-demo" class="btn-header">View Demos</a>
-        </div>
-    </div>
         </div> 
     </div>    
 
