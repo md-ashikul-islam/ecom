@@ -33,7 +33,7 @@
             <?php include_once('includes/slider.php'); ?>
 
             <!--Block 02: Banners-->
-            <?php include_once("includes/block1.php"); ?>
+            
 
             <!--Block 03: Categories-->
             
@@ -49,9 +49,6 @@
 
             <!--Block 06: Advance Box-->
             <?php include_once("includes/advancedbox.php"); ?> 
-
-            <!--Block 08: Products-->
-            <?php include_once("includes/products.php"); ?> 
             
     <!-- FOOTER -->
     <?php include_once("includes/footer.php"); ?>

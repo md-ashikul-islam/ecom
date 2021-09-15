@@ -78,7 +78,7 @@ if(isset($_GET['logoutuser'])){
                 <div class="shopping-cart-container">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <h3 class="box-title">Order History</h3>
+                            <h3 class="box-title">User Details</h3>
                             <form class="shopping-cart-form" action="#" method="post">
                                 <table class="shop_table cart-form">
                                     <thead>

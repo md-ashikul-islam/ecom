@@ -7,8 +7,8 @@ while ($data = mysqli_fetch_assoc($ctg)) {
     $ctgDatas[] = $data;
 }
 
-if(isset($_POST['user_reg_btn'])){
-    $msg= $obj -> user_registration($_POST);
+if (isset($_POST['user_reg_btn'])) {
+    $msg = $obj->user_registration($_POST);
 }
 ?>
 
@@ -21,7 +21,27 @@ if(isset($_POST['user_reg_btn'])){
     <!-- HEADER -->
     <header id="header" class="header-area style-01 layout-04">
         <?php include_once("includes/headertop.php"); ?>
-        <?php include_once("includes/headermiddle.php"); ?>
+        <div class="header-middle biolife-sticky-object ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-2 col-md-6 col-xs-6">
+                        <a href="index.php" class="biolife-logo"><img src="assets/images/cholokini.png" alt="biolife logo"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-menu-toggle">
+            <a class="btn-toggle" data-object="open-mobile-menu" href="javascript:void(0)">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
     </header>
 
 
@@ -32,7 +52,7 @@ if(isset($_POST['user_reg_btn'])){
         <div id="main-content" class="main-content">
             <div class="container">
                 <h2>User Registration</h2>
-                <?php if(isset($msg)){
+                <?php if (isset($msg)) {
                     echo $msg;
                 } ?>
                 <div class="row">
@@ -49,11 +69,11 @@ if(isset($_POST['user_reg_btn'])){
                                     <label for="Name">Name:<span class="requite">*</span></label>
                                     <input type="text" id="fid-uname" name="name" value="" class="txt-input">
                                 </p>
-                              
+
                                 <p class="form-row">
                                     <label for="useremail">Email:<span class="requite">*</span></label>
                                     <input type="email" id="fid-email" name="email" value="" class="txt-input">
-                                </p>                               
+                                </p>
                                 <p class="form-row">
                                     <label for="user_password">Password:<span class="requite">*</span></label>
                                     <input type="password" id="fid-pass" name="pass" value="" class="txt-input">
@@ -61,7 +81,7 @@ if(isset($_POST['user_reg_btn'])){
                                 <p class="form-row">
                                     <label for="user-mobile">Phone no:<span class="requite">*</span></label>
                                     <input type="number" id="fid-phoneNo" name="number" value="" class="txt-input">
-                                </p>                           
+                                </p>
                                 <input class="btn btn-submit btn-bold btn-block" value="Create an Account" type="submit" name="user_reg_btn">
                             </form>
                             <br>

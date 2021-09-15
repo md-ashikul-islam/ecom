@@ -22,7 +22,7 @@ include("includes/header.php");
     <body>
         <div class="fixed-button">
             <a href="https://codedthemes.com/item/gradient-able-admin-template" target="_blank" class="btn btn-md btn-primary">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </a>
         </div>
         <!-- Pre-loader start -->
